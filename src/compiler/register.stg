@@ -1,0 +1,50 @@
+group pierwszy;
+
+deflt(elem) ::= <<
+    <elem; separator="\n">
+>>
+
+int(i) ::= <<
+MOV A,#<i>
+>>
+
+var(i) ::= <<
+MOV A,[<i>]
+>>
+
+twoop(p1, p2) ::= <<
+<p2>
+PUSH A
+<p1>
+POP B
+>>
+
+add(p1,p2) ::= <<
+<twoop(p1,p2)>
+ADD A,B
+>>
+
+sub(p1,p2) ::= <<
+<twoop(p1,p2)>
+SUB A,B
+>>
+
+mul(p1,p2) ::= <<
+<twoop(p1,p2)>
+MUL A,B
+>>
+
+div(p1,p2) ::= <<
+<twoop(p2,p1)>
+DIV A,B
+>>
+
+declare(name, value) ::= <<
+DD <name>
+<value>
+MOV [<name>],A
+>>
+
+brk() ::= <<
+BRK
+>>
